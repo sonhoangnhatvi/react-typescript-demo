@@ -13,6 +13,10 @@ import { ThemeContextProvider } from "./components/context/ThemeContext";
 import { UserContextProvider } from "./components/context/UserContext";
 import { User } from "./components/context/User";
 import { Name } from "./components/Person.types";
+import { useDispatch } from "react-redux";
+import { bindActionCreators } from "redux";
+import { actionCreators, State } from "./components/state";
+import { useSelector } from "react-redux";
 
 function App() {
   const personName = {
@@ -26,10 +30,33 @@ function App() {
     { first: "Princess", last: "Diana" },
   ];
 
+  const dispatch = useDispatch();
+
+  const { depositMoney, widthrawMoney, bankrupt } = bindActionCreators(
+    actionCreators,
+    dispatch
+  );
+
+  const amount = useSelector((state: State) => state.bank.accountBalance);
+
   return (
     <div className="App">
-      <PersonList names={nameList}></PersonList>
+      <h1>App</h1>
     </div>
+
+    // // For redux demo
+    // <div className="App">
+    //   <h1>{amount}</h1>
+    //   <button onClick={() => depositMoney(1000)}>Deposit</button>
+    //   <button onClick={() => widthrawMoney(500)}>Widtdraw</button>
+    //   <button onClick={() => bankrupt()}>Bankrupt</button>
+    // </div>
+
+    // <div className="App">
+    //   <PersonList names={nameList}></PersonList>
+    // </div>
+
+    // <div className="App">
     // <Greet name="Hoang Nhat Son" messageCount={10} isLoggedIn={false} />
     // <Greet name="Hoang Nhat Son" isLoggedIn={false} />
     // <Person name={personName}></Person>
@@ -61,6 +88,7 @@ function App() {
     // <UserContextProvider>
     //   <User />
     // </UserContextProvider>
+    // </div>
   );
 }
 
