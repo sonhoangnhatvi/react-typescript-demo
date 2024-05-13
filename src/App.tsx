@@ -17,6 +17,7 @@ import { useDispatch } from "react-redux";
 import { bindActionCreators } from "redux";
 import { actionCreators, State } from "./components/state";
 import { useSelector } from "react-redux";
+import Curd from "./crud";
 
 function App() {
   const personName = {
@@ -41,7 +42,7 @@ function App() {
 
   return (
     <div className="App">
-      <h1>App</h1>
+      <Curd></Curd>
     </div>
 
     // // For redux demo
